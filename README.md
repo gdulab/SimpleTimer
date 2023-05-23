@@ -1,1 +1,1 @@
-SimpleTimer app
+Simple TimerApp
