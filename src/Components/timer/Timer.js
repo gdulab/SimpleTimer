@@ -1,34 +1,20 @@
 import styles from './Timer.module.scss'
 
-function padTo2Digits(num) {
-    return num.toString().padStart(2, '0');
+const msToTime = (time) => {
+    let msecs = Math.floor(time);
+    msecs = msecs % 100;
+    let secs = Math.floor(time / 100);
+    secs = secs % 60;
+    let mins = Math.floor(time/60/100)
+    mins = mins % 60;
+    const hours = Math.floor(time/60/60/100);
+    return [hours, mins, secs, msecs].map(item => item <10 ? '0' + item:item).join(':');
 }
 
-
-let miliseconds = -1;
 const Timer = props => {
-    if (props.time === 0){miliseconds = -1};
-    let seconds = Math.floor(props.time / 100);
-    let minutes = Math.floor(seconds / 60);
-    let hours = Math.floor(minutes / 60);
-
-    if (miliseconds % 99 === 0) {
-        miliseconds = 0;
-    }
-    miliseconds += 1;
-    seconds = seconds % 60;
-    minutes = minutes % 60;
-    hours = hours % 60;
-
-    let milisecondsDigit = 0;
-    if (miliseconds<10) {milisecondsDigit = '0'+ miliseconds} 
-    else {milisecondsDigit = miliseconds};
-
-
     return (
         <div className={styles.timerDiv}>
-            <span className={styles.timerDigits}>{padTo2Digits(hours)}:{padTo2Digits(minutes)}:{padTo2Digits(
-        seconds)}.</span><span>{milisecondsDigit}</span>
+            <span className={styles.timerDigits}>{msToTime(props.time)}</span>
         </div>
     )
 }

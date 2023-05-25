@@ -3,17 +3,16 @@ import Button from "./Components/Button/Button"
 import Timer from "./Components/timer/Timer";
 import { useState } from "react";
 
-const App = () => {
+const INTERVAL_MS = 10;
 
+const App = () => {
     const [time, setTime] = useState(0);
     const [timer, setTimer] = useState(null);
 
     const start = () => {
         setTimer(setInterval(() => {
-
             setTime(prevValue => prevValue + 1);
-
-        }, 10))
+        }, INTERVAL_MS))
 
     }
 
